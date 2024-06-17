@@ -136,14 +136,19 @@ public class Main {
     public static String checkResult(String result) throws Exception {   //проверяет результат на римский ответ
         int res = Integer.parseInt(result);
 
-        if (romanExpression && (res <= 0 || res > 10)) {
+        if (romanExpression && (res <= 0)) {
             throw new Exception("не удалось преобразовать ответ в римский формат");
         }
 
         if (romanExpression) {
-            for (int i = 0; i <= 9; i++) {
-                if (res == i + 1) return romanNumbers[i];
-            }
+            String[] num = new String[] {"", "X", "XX", "XXX", "LX", "L", "LX", "LXX", "LXXX", "CX", "C"};
+            String dres = num[res / 10];
+            String cres;
+
+            if(res - res / 10 * 10 == 0) cres = "";
+            else cres = romanNumbers[res - res / 10 * 10 - 1];
+
+            return dres + cres;
         }
 
         return result;
